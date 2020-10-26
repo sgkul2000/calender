@@ -7,7 +7,7 @@
         <v-col cols="10" md="6" class="mx-auto">
           <div class="wrapper px-4">
 
-          <div class="text-overline my-3">
+          <div class="text-overline my-3 name" style="font-size:1.7rem !important;">
             Calender App
           </div>
           An app created with Vue, Vuetify and firebase. Highlighting features are the use firestore, firebase authentication and Google signin and signup.

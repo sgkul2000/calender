@@ -19,6 +19,9 @@
       <v-btn class="mx-4" v-if="user.loggedIn === true" @click="logout" color="error">
         Logout
       </v-btn>
+      <v-btn icon @click="$router.push({name: 'About'})">
+        <v-icon>mdi-help-circle-outline</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-main>
       <router-view />

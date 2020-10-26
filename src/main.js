@@ -5,16 +5,21 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import VueTextareaAutoSize from 'vue-textarea-autosize'
 import firebase from 'firebase/app'
+import 'firebase/auth'
 import 'firebase/firestore'
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyD9MPUaj4oY9Bte5OwkrgooreWMyN43joc',
-  authDomain: 'calender-cf9da.firebaseapp.com',
-  databaseURL: 'https://calender-cf9da.firebaseio.com',
-  projectId: 'calender-cf9da',
-  storageBucket: 'calender-cf9da.appspot.com',
-  messagingSenderId: '1094402367030',
-  appId: '1:1094402367030:web:8cd31c98bedb0f818a0297'
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGE_SENDER,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID
+})
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch('fetchUser', user)
 })
 
 Vue.use(VueTextareaAutoSize)

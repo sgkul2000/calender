@@ -1,19 +1,8 @@
 <template>
   <div id="calenderMain">
-    <v-btn
-      icon
-      class="ma-2"
-      @click="$refs.calendar.prev()"
-    >
-      <v-icon>mdi-chevron-left</v-icon>
-    </v-btn>
-    <v-btn
-      icon
-      class="ma-2"
-      @click="$refs.calendar.next()"
-    >
-      <v-icon>mdi-chevron-right</v-icon>
-    </v-btn>
+    <div class="calendarTitle text-subtitle-1">
+      Showing <span class="name mx-1">{{ user.data.displayName }}'s </span>Calendar
+    </div>
     <v-sheet height="64">
       <v-toolbar flat>
         <v-btn
@@ -190,6 +179,7 @@
 
 <script>
 import { db } from '@/main'
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     today: new Date().toISOString().substr(0, 10),
@@ -239,6 +229,7 @@ export default {
     async addEvent () {
       if (this.name && this.start && this.end) {
         await db.collection('calEvent').add({
+          userId: this.user.data.id,
           name: this.name,
           details: this.details,
           start: this.start,
@@ -292,7 +283,7 @@ export default {
     },
     async getEvents () {
       this.events = []
-      const snapshot = await db.collection('calEvent').get()
+      const snapshot = await db.collection('calEvent').where('userId', '==', this.user.data.id.toString()).get()
       snapshot.forEach((doc) => {
         const appData = doc.data()
         appData.id = doc.id
@@ -305,9 +296,13 @@ export default {
     rnd (a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
   }
 }
 </script>
 
-<style>
-</style>
+<style scoped src="@/assets/calender.scss" lang="scss" />

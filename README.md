@@ -1,6 +1,9 @@
 # calender
 
-## Project setup
+__A calendar app for your daily events.__
+
+
+## Project setup (Project was created with vue cli)
 ```
 npm install
 ```
@@ -20,5 +23,8 @@ npm run build
 npm run lint
 ```
 
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+_Feel free to contribute._
